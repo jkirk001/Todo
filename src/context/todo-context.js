@@ -39,11 +39,10 @@ const TodoContextProvider = (props) => {
     )
       .then((res) => {
         console.log(res);
-        return JSON.stringify(res);
+        const updatedTodos = allTodos.filter((todo) => todo.id !== id);
+        setAllTodos(updatedTodos);
       })
       .catch((e) => console.log(e.message));
-    const updatedTodos = allTodos.filter((todo) => todo.id !== id);
-    setAllTodos(updatedTodos);
   };
 
   const randIndex = () => {
