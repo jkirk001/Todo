@@ -7,19 +7,15 @@ const TodoList = () => {
 
   const todoItems = todoContext.todos.map((item, index) => {
     return (
-      <li key={index}>
+      <li key={index} onClick={() => todoContext.delete(item.id)}>
         <h3>{item.title}</h3>
         <p>{item.body}</p>
       </li>
     );
   });
+
   return (
     <div className={classes.ListContainer}>
-      <button
-        onClick={() => todoContext.new({ title: "WHOA", body: "BODY BODY" })}
-      >
-        New ToDo
-      </button>
       <ul className={classes.List}>{todoItems}</ul>
     </div>
   );
