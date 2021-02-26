@@ -1,0 +1,19 @@
+.ListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.List {
+  background-color: rgba(13, 41, 102, 0.803);
+  width: 500px;
+  list-style-type: none;
+  padding: 0px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
