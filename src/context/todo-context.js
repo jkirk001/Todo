@@ -22,7 +22,7 @@ const TodoContextProvider = (props) => {
         const nearlyTodos = Object.entries(resData);
         const finalTodos = [];
         for (let each of nearlyTodos) {
-          let item = { ...each[1], id: each[0] };
+          let item = { ...each[1], name: each[0] };
           finalTodos.push(item);
         }
 
@@ -39,7 +39,7 @@ const TodoContextProvider = (props) => {
     )
       .then((res) => {
         console.log(res);
-        const updatedTodos = allTodos.filter((todo) => todo.id !== id);
+        const updatedTodos = allTodos.filter((todo) => todo.name !== id);
         setAllTodos(updatedTodos);
       })
       .catch((e) => console.log(e.message));
@@ -57,10 +57,17 @@ const TodoContextProvider = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ ...data, id: randIndex() }),
-    }).then((res) => {
-      console.log(res);
-      setAllTodos([...allTodos, { ...data, id: randIndex() }]);
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((resData) => {
+        setAllTodos([
+          ...allTodos,
+          { ...data, id: randIndex(), name: resData.name },
+        ]);
+      })
+      .then(() => console.log(allTodos));
   };
 
   return (

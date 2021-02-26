@@ -7,9 +7,12 @@ const TodoInput = () => {
   const [todoState, setTodoState] = useState({ title: "", body: "" });
 
   return (
-    <div>
-      <form onSubmit={(e) => todoContext.post(e, todoState)}>
-        <div>
+    <div className={classes.FormContainer}>
+      <form
+        className={classes.Form}
+        onSubmit={(e) => todoContext.post(e, todoState)}
+      >
+        <div className={classes.FormItem}>
           <label> Title</label>
           <input
             type="text"
@@ -20,7 +23,7 @@ const TodoInput = () => {
             }
           />
         </div>
-        <div>
+        <div className={classes.FormItem}>
           <label> Body</label>
           <input
             type="text"

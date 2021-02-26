@@ -7,7 +7,7 @@ const TodoList = () => {
 
   const todoItems = todoContext.todos.map((item, index) => {
     return (
-      <li key={index} onClick={() => todoContext.delete(item.id)}>
+      <li key={index} onClick={() => todoContext.delete(item.name)}>
         <h3>{item.title}</h3>
         <p>{item.body}</p>
       </li>
