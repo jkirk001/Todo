@@ -22,7 +22,7 @@ const TodoContextProvider = (props) => {
         const nearlyTodos = Object.entries(resData);
         const finalTodos = [];
         for (let each of nearlyTodos) {
-          let item = { ...each[1], name: each[0] };
+          let item = { ...each[1], id: each[0] };
           finalTodos.push(item);
         }
 
@@ -31,7 +31,17 @@ const TodoContextProvider = (props) => {
   }, []);
 
   const deleteHandler = (id) => {
-    fetch("");
+    fetch(
+      `https://react-hooks-8671f-default-rtdb.firebaseio.com/todos/${id}.json`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((res) => {
+        console.log(res);
+        return JSON.stringify(res);
+      })
+      .catch((e) => console.log(e.message));
     const updatedTodos = allTodos.filter((todo) => todo.id !== id);
     setAllTodos(updatedTodos);
   };
