@@ -14,18 +14,20 @@ const TodoContextProvider = (props) => {
   ]);
 
   useLayoutEffect(() => {
-    fetch("https://react-hooks-8671f-default-rtdb.firebaseio.com/todos.json")
+    fetch(
+      'https://react-hooks-8671f-default-rtdb.firebaseio.com/todos.json?orderby="due"'
+    )
       .then((res) => {
         return res.json();
       })
       .then((resData) => {
         const nearlyTodos = Object.entries(resData);
-        const finalTodos = [];
+        let finalTodos = [];
         for (let each of nearlyTodos) {
           let item = { ...each[1], name: each[0] };
           finalTodos.push(item);
         }
-
+        finalTodos = finalTodos.sort((a, b) => (a.due > b.due ? 1 : -1));
         setAllTodos(finalTodos);
       });
   }, []);
@@ -56,7 +58,11 @@ const TodoContextProvider = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...data, id: randIndex() }),
+      body: JSON.stringify({
+        ...data,
+        id: randIndex(),
+        due: Date.now() + 86400000,
+      }),
     })
       .then((res) => {
         return res.json();
@@ -64,10 +70,14 @@ const TodoContextProvider = (props) => {
       .then((resData) => {
         setAllTodos([
           ...allTodos,
-          { ...data, id: randIndex(), name: resData.name },
+          {
+            ...data,
+            id: randIndex(),
+            name: resData.name,
+            due: Date.now() + 86400000,
+          },
         ]);
-      })
-      .then(() => console.log(allTodos));
+      });
   };
 
   return (

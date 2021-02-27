@@ -26,3 +26,12 @@
   box-shadow: 0 7px 15px rgba(255, 255, 255, 0.571);
   background-color: rgba(255, 0, 0, 0.112);
 }
+.TodoItemLate {
+  width: 90%;
+  margin: 10px 0;
+  border: 1px solid white;
+  border-radius: 10px 10px;
+  box-sizing: border-box;
+  box-shadow: 0 7px 15px rgba(235, 128, 128, 0.571);
+  background-color: rgba(160, 24, 24, 0.557);
+}

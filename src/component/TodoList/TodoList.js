@@ -6,9 +6,13 @@ const TodoList = () => {
   const todoContext = useContext(TodoContext);
 
   const todoItems = todoContext.todos.map((item, index) => {
+    let itemClass = classes.TodoItem;
+    if (item.due < Date.now()) {
+      itemClass = classes.TodoItemLate;
+    }
     return (
       <li
-        className={classes.TodoItem}
+        className={itemClass}
         key={index}
         onClick={() => todoContext.delete(item.name)}
       >
