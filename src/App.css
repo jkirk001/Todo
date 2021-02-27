@@ -4,7 +4,7 @@
   /*background: linear-gradient(to left, rgba(13, 41, 102, 0.803), #c74b4bde),
     linear-gradient(to right, rgba(13, 41, 102, 0.803), #c74b4bde),
     linear-gradient(to top, rgba(13, 41, 102, 0.803), rgba(13, 41, 102, 0.269));*/
-  background: linear-gradient(
+  background-color: linear-gradient(
       217deg,
       rgba(208, 57, 57, 0.8),
       rgba(255, 0, 0, 0) 70.71%
@@ -15,8 +15,4 @@
       rgba(255, 89, 0, 0) 70.71%
     ),
     linear-gradient(360deg, rgba(22, 63, 154, 0.803), rgba(0, 0, 255, 0) 70.71%);
-}
-
-.App1 {
-  background: red;
 }
