@@ -7,11 +7,7 @@ export const TodoContext = React.createContext({
 });
 
 const TodoContextProvider = (props) => {
-  const [allTodos, setAllTodos] = useState([
-    { title: "test todo", body: "test body", id: "1x" },
-    { title: "test todo", body: "test body", id: "2z" },
-    { title: "test todo", body: "test body", id: "3w" },
-  ]);
+  const [allTodos, setAllTodos] = useState([]);
 
   useLayoutEffect(() => {
     fetch(

@@ -10,7 +10,7 @@ const TodoInput = () => {
     <div className={classes.FormContainer}>
       <form
         className={classes.Form}
-        autocomplete="off"
+        autoComplete="off"
         onSubmit={(e) => todoContext.post(e, todoState)}
       >
         <div className={classes.FormItem}>

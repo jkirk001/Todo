@@ -30,10 +30,10 @@
   transition: all 0.5s ease;
 }
 .FormItem input:hover {
-  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.432);
+  box-shadow: 0 6px 7px rgba(0, 0, 0, 0.432);
   border-bottom: 1px solid rgba(0, 0, 0, 0.276);
 }
 .FormItem input:focus {
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.432);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.432);
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
