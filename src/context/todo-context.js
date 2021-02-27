@@ -40,7 +40,6 @@ const TodoContextProvider = (props) => {
       }
     )
       .then((res) => {
-        console.log(res);
         const updatedTodos = allTodos.filter((todo) => todo.name !== id);
         setAllTodos(updatedTodos);
       })

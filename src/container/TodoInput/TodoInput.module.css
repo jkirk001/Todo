@@ -10,9 +10,30 @@
   align-items: center;
   justify-content: center;
 }
+/*.Form button {
+}*/
 .FormItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.FormItem input {
+  height: 30px;
+  border: 0;
+  border-bottom: 1px solid black;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0);
+  margin-bottom: 15px;
+  width: 500px;
+  outline: none;
+  transition: all 0.5s ease;
+}
+.FormItem input:hover {
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.432);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.276);
+}
+.FormItem input:focus {
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.432);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }

@@ -10,6 +10,7 @@ const TodoInput = () => {
     <div className={classes.FormContainer}>
       <form
         className={classes.Form}
+        autocomplete="off"
         onSubmit={(e) => todoContext.post(e, todoState)}
       >
         <div className={classes.FormItem}>
@@ -18,6 +19,15 @@ const TodoInput = () => {
             type="text"
             name="title"
             value={todoState.title}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const todoStateCopy = { ...todoState };
+                setTodoState({ title: "", body: "" });
+                return todoContext.post(e, todoStateCopy);
+              } else {
+                return null;
+              }
+            }}
             onChange={(e) =>
               setTodoState({ ...todoState, title: e.target.value })
             }
@@ -29,12 +39,20 @@ const TodoInput = () => {
             type="text"
             name="body"
             value={todoState.body}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const todoStateCopy = { ...todoState };
+                setTodoState({ title: "", body: "" });
+                return todoContext.post(e, todoStateCopy);
+              } else {
+                return null;
+              }
+            }}
             onChange={(e) =>
               setTodoState({ ...todoState, body: e.target.value })
             }
           />
         </div>
-        <button>New ToDo</button>
       </form>
     </div>
   );
