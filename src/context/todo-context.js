@@ -64,7 +64,8 @@ const TodoContextProvider = (props) => {
         return res.json();
       })
       .then((resData) => {
-        setAllTodos([
+        //! SORTING ARRAY BEFORE UPDATING STATE
+        const localUpdate = [
           ...allTodos,
           {
             ...data,
@@ -73,7 +74,8 @@ const TodoContextProvider = (props) => {
             date: Date.now(),
             due: Date.now() + 3600000 * parseFloat(data.number),
           },
-        ]);
+        ].sort((a, b) => (a.due > b.due ? 1 : -1));
+        setAllTodos(localUpdate);
       });
   };
 

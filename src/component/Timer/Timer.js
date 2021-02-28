@@ -3,15 +3,19 @@ import React, { useEffect, useState } from "react";
 const Timer = (props) => {
   // initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(props.timeLeft);
-
+  const { classHandler } = props;
   useEffect(() => {
     // exit early when we reach 0
-    if (!timeLeft || timeLeft <= 0) return;
+    if (!timeLeft || timeLeft <= 0) {
+      classHandler(timeLeft - 1);
+      return;
+    }
 
     // save intervalId to clear the interval when the
     // component re-renders
     const intervalId = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
+      classHandler(timeLeft - 1);
     }, 1000);
 
     // clear interval on re-render to avoid memory leaks
@@ -20,7 +24,7 @@ const Timer = (props) => {
     };
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
-  }, [timeLeft]);
+  }, [timeLeft, classHandler]);
 
   let hours = Math.floor(timeLeft / (60 * 60));
   let min = Math.floor((timeLeft % (60 * 60)) / 60);
