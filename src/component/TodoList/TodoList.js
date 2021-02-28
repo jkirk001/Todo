@@ -5,6 +5,8 @@ import { TodoContext } from "../../context/todo-context";
 const TodoList = () => {
   const todoContext = useContext(TodoContext);
 
+  //! Trying to create a streaming time from state --- MOVED TO OWN COMPONENT FOR EASE
+
   const todoItems = todoContext.todos.map((item, index) => {
     let itemClass = classes.TodoItem;
     if (item.due < Date.now()) {
@@ -15,6 +17,7 @@ const TodoList = () => {
     let min = Math.floor((time % 3600000) / 60000);
     let sec = Math.floor(((time % 3600000) % 60000) / 1000);
     let timeLeft = `Time Left: ${hours}h, ${min}m, ${sec}s`;
+    if (time <= 0) timeLeft = `Time is up!`;
     return (
       <li
         className={itemClass}

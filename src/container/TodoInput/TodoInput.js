@@ -4,7 +4,7 @@ import { TodoContext } from "../../context/todo-context";
 
 const TodoInput = () => {
   const todoContext = useContext(TodoContext);
-  const [todoState, setTodoState] = useState({ title: "", number: null });
+  const [todoState, setTodoState] = useState({ title: "", number: 0 });
 
   return (
     <div className={classes.FormContainer}>
