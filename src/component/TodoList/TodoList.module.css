@@ -23,8 +23,17 @@
   border: 1px solid white;
   border-radius: 10px 10px;
   box-sizing: border-box;
-  box-shadow: 0 7px 15px rgba(255, 255, 255, 0.571);
-  background-color: rgba(255, 0, 0, 0.112);
+  box-shadow: 0 7px 15px rgba(23, 143, 23, 0.461);
+  background-color: rgba(40, 134, 55, 0.557);
+}
+.TodoItemClose {
+  width: 90%;
+  margin: 10px 0;
+  border: 1px solid white;
+  border-radius: 10px 10px;
+  box-sizing: border-box;
+  box-shadow: 0 7px 15px rgba(228, 235, 128, 0.571);
+  background-color: rgba(139, 160, 24, 0.557);
 }
 .TodoItemLate {
   width: 90%;

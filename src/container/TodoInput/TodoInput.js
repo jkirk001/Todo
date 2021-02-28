@@ -18,6 +18,7 @@ const TodoInput = () => {
           <input
             type="text"
             name="title"
+            placeholder="Enter your Todo"
             value={todoState.title}
             onKeyDown={(e) => {
               if (e.key === "Enter") {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./TodoList.module.css";
 import Timer from "../Timer/Timer";
 import { TodoContext } from "../../context/todo-context";
@@ -6,29 +6,62 @@ import { TodoContext } from "../../context/todo-context";
 const TodoList = () => {
   const todoContext = useContext(TodoContext);
 
+  //#region
   const todoItems = todoContext.todos.map((item, index) => {
     let itemClass = classes.TodoItem;
-    if (item.due < Date.now()) {
-      itemClass = classes.TodoItemLate;
+    if (item.due - Date.now() < 10 * 60000) {
+      if (item.due - Date.now() > 0) {
+        itemClass = classes.TodoItemClose;
+      } else {
+        itemClass = classes.TodoItemLate;
+      }
     }
     let time = item.due - Date.now();
 
-    //! Trying to create a streaming time from state --- MOVED TO OWN COMPONENT FOR EASE
+    //#endregion
+
+    //! ^^^Backup^^^^
+    //! Attempted class setting through useEffect below. FAILED FOR NOW
     //#region
-    /*
+    /*const [itemDetails, setItemDetails] = useState([]);
+
+  const todoItems = todoContext.todos.map((item, index) => {
     let time = item.due - Date.now();
-    let hours = Math.floor(time / 3600000);
-    let min = Math.floor((time % 3600000) / 60000);
-    let sec = Math.floor(((time % 3600000) % 60000) / 1000);
-    let timeLeft = `Time Left: ${hours}h, ${min}m, ${sec}s`;
-    if (time <= 0) timeLeft = `Time is up!`;
-    */
+    useEffect(() => {
+      // exit early when we reach 0
+      if (!time || time <= 0) {
+        setItemDetails((prev) => {
+          const lol = prev.filter((todoState)=> todoState.name !== item.name );
+
+          return [...lol, { name: lol.name, timeLeft: 0 }];
+        });
+      }
+
+      // save intervalId to clear the interval when the
+      // component re-renders
+      const intervalId = setTimeout(() => {
+        setTimeLeft((prev)=>{
+          prev.filter((todoState)=> {
+
+            return timeLeft - 1;
+          })
+          
+        })
+      }, 1000);
+
+      // clear interval on re-render to avoid memory leaks
+      return () => {
+        clearInterval(intervalId);
+      };
+      // add timeLeft as a dependency to re-rerun the effect
+      // when we update it
+    }, [timeLeft]); */
     //#endregion
 
     return (
       <li
         className={itemClass}
-        key={index}
+        key={item.name}
         onClick={() => todoContext.delete(item.name)}
       >
         <h3>{item.title}</h3>

@@ -15,7 +15,9 @@ const Timer = (props) => {
     }, 1000);
 
     // clear interval on re-render to avoid memory leaks
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+    };
     // add timeLeft as a dependency to re-rerun the effect
     // when we update it
   }, [timeLeft]);
@@ -23,7 +25,15 @@ const Timer = (props) => {
   let hours = Math.floor(timeLeft / (60 * 60));
   let min = Math.floor((timeLeft % (60 * 60)) / 60);
   let sec = Math.floor((timeLeft % (60 * 60)) % 60);
-  let finalTime = `${hours}h, ${min}m, ${sec}s`;
+
+  let finalTime = `${hours > 9 ? hours : "0" + hours}h, ${
+    min > 9 ? min : "0" + min
+  }m`;
+  if (hours === 0 && min < 10) {
+    finalTime = `${hours > 9 ? hours : "0" + hours}h, ${
+      min > 9 ? min : "0" + min
+    }m, ${sec > 9 ? sec : "0" + sec}s`;
+  }
 
   return (
     <React.Fragment>
@@ -34,4 +44,4 @@ const Timer = (props) => {
 
 export default Timer;
 
-//!Thanks stackOverflow
+//!Thanks stackOverflow for the idea

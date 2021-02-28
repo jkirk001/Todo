@@ -57,7 +57,7 @@ const TodoContextProvider = (props) => {
         ...data,
         id: randIndex(),
         date: Date.now(),
-        due: Date.now() + 3600000 * parseInt(data.number),
+        due: Date.now() + 3600000 * parseFloat(data.number),
       }),
     })
       .then((res) => {
@@ -71,7 +71,7 @@ const TodoContextProvider = (props) => {
             id: randIndex(),
             name: resData.name,
             date: Date.now(),
-            due: Date.now() + 3600000 * parseInt(data.number),
+            due: Date.now() + 3600000 * parseFloat(data.number),
           },
         ]);
       });
