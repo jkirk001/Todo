@@ -10,6 +10,11 @@ const TodoList = () => {
     if (item.due < Date.now()) {
       itemClass = classes.TodoItemLate;
     }
+    let time = item.due - Date.now();
+    let hours = Math.floor(time / 3600000);
+    let min = Math.floor((time % 3600000) / 60000);
+    let sec = Math.floor(((time % 3600000) % 60000) / 1000);
+    let timeLeft = `Time Left: ${hours}h, ${min}m, ${sec}s`;
     return (
       <li
         className={itemClass}
@@ -17,7 +22,7 @@ const TodoList = () => {
         onClick={() => todoContext.delete(item.name)}
       >
         <h3>{item.title}</h3>
-        <p>{item.body}</p>
+        <p>{timeLeft}</p>
       </li>
     );
   });

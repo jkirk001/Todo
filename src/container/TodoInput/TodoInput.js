@@ -4,7 +4,7 @@ import { TodoContext } from "../../context/todo-context";
 
 const TodoInput = () => {
   const todoContext = useContext(TodoContext);
-  const [todoState, setTodoState] = useState({ title: "", body: "" });
+  const [todoState, setTodoState] = useState({ title: "", number: null });
 
   return (
     <div className={classes.FormContainer}>
@@ -14,7 +14,7 @@ const TodoInput = () => {
         onSubmit={(e) => todoContext.post(e, todoState)}
       >
         <div className={classes.FormItem}>
-          <label> Title</label>
+          <label> Todo</label>
           <input
             type="text"
             name="title"
@@ -22,7 +22,7 @@ const TodoInput = () => {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 const todoStateCopy = { ...todoState };
-                setTodoState({ title: "", body: "" });
+                setTodoState({ title: "", number: 0 });
                 return todoContext.post(e, todoStateCopy);
               } else {
                 return null;
@@ -34,22 +34,23 @@ const TodoInput = () => {
           />
         </div>
         <div className={classes.FormItem}>
-          <label> Body</label>
+          <label> Due in: </label>
           <input
-            type="text"
+            type="number"
+            placeholder="Hours"
             name="body"
-            value={todoState.body}
+            value={todoState.number}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 const todoStateCopy = { ...todoState };
-                setTodoState({ title: "", body: "" });
+                setTodoState({ title: "", number: 0 });
                 return todoContext.post(e, todoStateCopy);
               } else {
                 return null;
               }
             }}
             onChange={(e) =>
-              setTodoState({ ...todoState, body: e.target.value })
+              setTodoState({ ...todoState, number: e.target.value })
             }
           />
         </div>

@@ -11,7 +11,7 @@ const TodoContextProvider = (props) => {
 
   useLayoutEffect(() => {
     fetch(
-      'https://react-hooks-8671f-default-rtdb.firebaseio.com/todos.json?orderby="due"'
+      'https://react-hooks-8671f-default-rtdb.firebaseio.com/todos2.json?orderby="due"'
     )
       .then((res) => {
         return res.json();
@@ -30,7 +30,7 @@ const TodoContextProvider = (props) => {
 
   const deleteHandler = (id) => {
     fetch(
-      `https://react-hooks-8671f-default-rtdb.firebaseio.com/todos/${id}.json`,
+      `https://react-hooks-8671f-default-rtdb.firebaseio.com/todos2/${id}.json`,
       {
         method: "DELETE",
       }
@@ -48,7 +48,7 @@ const TodoContextProvider = (props) => {
   const postTodo = (event, data) => {
     event.preventDefault();
 
-    fetch("https://react-hooks-8671f-default-rtdb.firebaseio.com/todos.json", {
+    fetch("https://react-hooks-8671f-default-rtdb.firebaseio.com/todos2.json", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,8 @@ const TodoContextProvider = (props) => {
       body: JSON.stringify({
         ...data,
         id: randIndex(),
-        due: Date.now() + 86400000,
+        date: Date.now(),
+        due: Date.now() + 3600000 * parseInt(data.number),
       }),
     })
       .then((res) => {
@@ -69,7 +70,8 @@ const TodoContextProvider = (props) => {
             ...data,
             id: randIndex(),
             name: resData.name,
-            due: Date.now() + 86400000,
+            date: Date.now(),
+            due: Date.now() + 3600000 * parseInt(data.number),
           },
         ]);
       });
