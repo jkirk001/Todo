@@ -7,13 +7,11 @@ const TodoList = () => {
   const todoContext = useContext(TodoContext);
 
   const todoItems = todoContext.todos.map((item, index) => {
-    let time = item.due - Date.now();
-
     return (
       <TodoListItem
         key={item.name}
         title={item.title}
-        time={time}
+        time={item.due}
         name={item.name}
       />
     );

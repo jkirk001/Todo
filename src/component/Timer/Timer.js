@@ -7,7 +7,7 @@ const Timer = (props) => {
   useEffect(() => {
     // exit early when we reach 0
     if (!timeLeft || timeLeft <= 0) {
-      classHandler(timeLeft - 1);
+      classHandler(timeLeft);
       return;
     }
 

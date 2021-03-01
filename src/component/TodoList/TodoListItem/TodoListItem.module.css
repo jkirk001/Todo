@@ -5,7 +5,18 @@
   border-radius: 10px 10px;
   box-sizing: border-box;
   box-shadow: 0 7px 15px rgba(23, 143, 23, 0.461);
+  background-color: rgba(255, 255, 255, 0.845);
+  /*animation: Wiggle 1s ease-in-out 1;*/
+}
+.TodoItemEarly {
+  width: 90%;
+  margin: 10px 0;
+  border: 1px solid white;
+  border-radius: 10px 10px;
+  box-sizing: border-box;
+  box-shadow: 0 7px 15px rgba(23, 143, 23, 0.461);
   background-color: rgba(40, 134, 55, 0.557);
+  animation: Wiggle 1s ease-in-out 1;
 }
 .TodoItemClose {
   width: 90%;
@@ -15,6 +26,7 @@
   box-sizing: border-box;
   box-shadow: 0 7px 15px rgba(228, 235, 128, 0.571);
   background-color: rgba(139, 160, 24, 0.557);
+  animation: WiggleHarder 1s ease-in-out 1;
 }
 .TodoItemLate {
   width: 90%;
@@ -24,4 +36,56 @@
   box-sizing: border-box;
   box-shadow: 0 7px 15px rgba(235, 128, 128, 0.571);
   background-color: rgba(160, 24, 24, 0.557);
+  animation: WiggleFinal 1s ease-in-out 1;
+}
+@keyframes Wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes WiggleHarder {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(10deg);
+  }
+  95% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes WiggleFinal {
+  0% {
+    transform: translate(0px);
+  }
+  80% {
+    transform: translate(0px);
+  }
+  85% {
+    transform: translate(10px);
+  }
+  95% {
+    transform: translate(-10px);
+  }
+  100% {
+    transform: translate(0px);
+  }
 }
