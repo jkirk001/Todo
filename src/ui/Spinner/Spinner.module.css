@@ -45,7 +45,7 @@
   content: "";
 }
 .Loader:after {
-  background: #8a5f7f85;
+  background: #8a5f7f23;
   width: 75%;
   height: 75%;
   border-radius: 50%;

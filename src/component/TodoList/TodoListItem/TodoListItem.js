@@ -39,7 +39,6 @@ const TodoListItem = (props) => {
         setTimeLeftClass(classes.Delete);
         setTimeout(() => {
           todoContext.delete(props.name);
-          console.log("TEST");
         }, 2000);
       }}
     >
@@ -49,6 +48,7 @@ const TodoListItem = (props) => {
       <Timer
         timeLeft={(props.time - Date.now()) / 1000}
         classHandler={(time) => setTimeState(time)}
+        style={{ overflow: "hidden", whiteSpace: "wrap", height: "1em" }}
       />
     </li>
   );
