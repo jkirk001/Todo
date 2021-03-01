@@ -15,6 +15,7 @@ const TodoListItem = (props) => {
 
   //? TESTING WATER ON ADDING QUICK CLASS ON STATE CHANGE TO FORCE WIGGLE
   useEffect(() => {
+    if (timeLeftClass === classes.Delete) return;
     if (timeLeft < 60 * 10) {
       if (timeLeft > 0) {
         if (timeLeftClass !== classes.TodoItemClose)
@@ -29,15 +30,22 @@ const TodoListItem = (props) => {
     }
   }, [timeLeft, timeLeftClass]);
   //? END TEST
+
   return (
     <li
       key={timeLeftClass}
       className={timeLeftClass}
       onClick={() => {
-        todoContext.delete(props.name);
+        setTimeLeftClass(classes.Delete);
+        setTimeout(() => {
+          todoContext.delete(props.name);
+          console.log("TEST");
+        }, 2000);
       }}
     >
-      <h3>{props.title}</h3>
+      <h3 style={{ overflow: "hidden", whiteSpace: "wrap", height: "1em" }}>
+        {props.title}
+      </h3>
       <Timer
         timeLeft={(props.time - Date.now()) / 1000}
         classHandler={(time) => setTimeState(time)}
