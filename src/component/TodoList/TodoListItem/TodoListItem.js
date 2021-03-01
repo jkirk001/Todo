@@ -42,9 +42,7 @@ const TodoListItem = (props) => {
         }, 2000);
       }}
     >
-      <h3 style={{ overflow: "hidden", whiteSpace: "wrap", height: "1em" }}>
-        {props.title}
-      </h3>
+      <h3>{props.title}</h3>
       <Timer
         timeLeft={(props.time - Date.now()) / 1000}
         classHandler={(time) => setTimeState(time)}
