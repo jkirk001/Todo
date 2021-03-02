@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
 
 const Timer = (props) => {
-  // initialize timeLeft with the seconds prop
+  //! initialize timeLeft with the seconds prop
   const [timeLeft, setTimeLeft] = useState(props.timeLeft);
+
+  //! spreads classHandler from props -- keeps timer in state, so li can change classes appropriately, keeps state here so it nows when to stop Timers
   const { classHandler } = props;
   useEffect(() => {
-    // exit early when we reach 0
+    //!Stops timers
     if (!timeLeft || timeLeft <= 0) {
       classHandler(timeLeft);
       return;
     }
-
-    // save intervalId to clear the interval when the
-    // component re-renders
+    //!async function that is the timer
     const intervalId = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
       classHandler(timeLeft - 1);
     }, 1000);
-
-    // clear interval on re-render to avoid memory leaks
+    //! Garbage collection
     return () => {
       clearInterval(intervalId);
     };
-    // add timeLeft as a dependency to re-rerun the effect
-    // when we update it
   }, [timeLeft, classHandler]);
 
   let hours = Math.floor(timeLeft / (60 * 60));

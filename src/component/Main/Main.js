@@ -10,16 +10,18 @@ function Main() {
   const todoContext = useContext(TodoContext);
   const [reload, setReload] = useState(false);
 
+  //! When page loads, nothing, when Logout button clicked -- re-direct to login
   useEffect(() => {
     if (reload) <Redirect to="/" />;
     else return;
   }, [reload]);
 
+  //! sets spinner to show if todo list is emtpy, rather than empty list (Nothing)
   let loadingList = <Spinner />;
   if (todoContext.todos.length > 0) {
     loadingList = <TodoList />;
   }
-
+  //! if localStorage contains a truthy "auth" value, load page-- otherwise redirect to login
   const load = localStorage.getItem("auth");
   let main = <Redirect to="/" />;
   if (load) {

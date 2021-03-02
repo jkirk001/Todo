@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
 
 export const TodoContext = React.createContext({
+  //! Essentially Global state at any point in App that has context
   todos: [],
   new: () => {},
   delete: () => {},
@@ -9,6 +10,7 @@ export const TodoContext = React.createContext({
 const TodoContextProvider = (props) => {
   const [allTodos, setAllTodos] = useState([]);
 
+  //! Uses Fetch API to get todos in DB -- sets it as state
   useLayoutEffect(() => {
     fetch(
       'https://react-hooks-8671f-default-rtdb.firebaseio.com/todos2.json?orderby="due"'
@@ -28,6 +30,7 @@ const TodoContextProvider = (props) => {
       });
   }, []);
 
+  //! Deletes Post in DB, then removes from state
   const deleteHandler = (id) => {
     fetch(
       `https://react-hooks-8671f-default-rtdb.firebaseio.com/todos2/${id}.json`,
@@ -41,10 +44,11 @@ const TodoContextProvider = (props) => {
       })
       .catch((e) => console.log(e.message));
   };
-
+  //! Random number used to ID todo items initallly -- Deprecated
   const randIndex = () => {
     return Math.floor(Math.random() * 100 + Math.random() * 555555);
   };
+  //! Posts new Todo to DB -- Then adds to state, but filters by due date-- soonest due go first
   const postTodo = (event, data) => {
     event.preventDefault();
 
@@ -78,12 +82,38 @@ const TodoContextProvider = (props) => {
         setAllTodos(localUpdate);
       });
   };
+  //! Login Handler for Auth -- Could move the state in here too...
+  const loginHandler = (e, email, password, setAuthed) => {
+    e.preventDefault();
+    let data = { email: email, password: password, returnSecureToken: true };
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWnyiTSs75htAGn7r8ze4vkmQ1nFnANQY",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("Uh Oh");
+        }
+      })
+      .then((resData) => {
+        console.log(resData);
+        localStorage.setItem("auth", resData.email);
+        setAuthed(true);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <TodoContext.Provider
       value={{
         delete: (id) => deleteHandler(id),
         post: (event, data) => postTodo(event, data),
+        login: loginHandler,
         todos: allTodos,
       }}
     >
@@ -91,5 +121,6 @@ const TodoContextProvider = (props) => {
     </TodoContext.Provider>
   );
 };
+//* Context component carries the values here as an object -- Any items wrapped by this component ( index.js, here) and useContext can call any of these methods/values
 
 export default TodoContextProvider;

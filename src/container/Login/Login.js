@@ -1,42 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./Login.module.css";
 import { withRouter, Redirect } from "react-router";
+import { TodoContext } from "../../context/todo-context";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isAuthed, setAuthed] = useState(false);
 
-  const loginHandler = (e) => {
-    e.preventDefault();
-    let data = { email: email, password: password, returnSecureToken: true };
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWnyiTSs75htAGn7r8ze4vkmQ1nFnANQY",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Uh Oh");
-        }
-      })
-      .then((resData) => {
-        console.log(resData);
-        localStorage.setItem("auth", resData.email);
-        setAuthed(true);
-      })
-      .catch((e) => console.log(e));
-  };
+  const todoContext = useContext(TodoContext);
+
+  //! Kind of ugly -- LMK if this can be done better
+  //* Loads login, unless already Authed -- Then <Redirect /> to "/home" -- Which will load, since loginHandler also setsAuthed.
 
   let login = (
     <React.Fragment>
       <h2>Login</h2>
-      <form className={classes.Form} onSubmit={(e) => loginHandler(e)}>
+      <form
+        className={classes.Form}
+        onSubmit={(e) => {
+          todoContext.login(e, email, password, setAuthed);
+        }}
+      >
         <div className={classes.FormItem}>
           <label>Email: </label>
           <input
