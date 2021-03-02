@@ -1,0 +1,71 @@
+.LoginDiv {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.FormItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.FormItem input {
+  height: 30px;
+  border: 0;
+  border-bottom: 1px solid black;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0);
+  margin-bottom: 15px;
+  width: 500px;
+  outline: none;
+  transition: all 0.5s ease;
+}
+
+.Form button {
+  outline: none;
+  border: 0px;
+  border-radius: 5px;
+  padding: 4px 10px;
+  background-color: rgba(136, 48, 48, 0.29);
+  transition: 0.5s;
+}
+
+.Form button:hover {
+  box-shadow: 0 1px 10px rgba(255, 217, 0, 0.475);
+}
+
+.Form button:focus {
+  animation: Spin 1s ease 1;
+}
+
+@keyframes Spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  5% {
+    transform: rotate(0deg);
+    background-color: rgba(130, 35, 35, 0.612);
+  }
+  80% {
+    transform: rotate(0deg);
+  }
+  85% {
+    transform: rotate(5deg);
+  }
+  95% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
